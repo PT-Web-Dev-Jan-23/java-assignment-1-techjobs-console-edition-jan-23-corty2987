@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +11,7 @@ public class TechJobs {
 
     static Scanner in = new Scanner(System.in);
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         // Initialize our field map with key/name pairs
         HashMap<String, String> columnChoices = new HashMap<>();
@@ -59,10 +60,12 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
+
                 String searchTerm = in.nextLine();
 
                 if (searchField.equals("all")) {
                     printJobs(JobData.findByValue(searchTerm));
+
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -112,14 +115,34 @@ public class TechJobs {
                 validChoice = true;
             }
 
-        } while(!validChoice);
+        } while (!validChoice);
 
         return choiceKeys[choiceIdx];
     }
 
+
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
+        if (someJobs.size() == 0) {
+            System.out.print("No Results");
 
-        System.out.println("printJobs is not implemented yet");
+        }
+        for (HashMap<String, String> job : someJobs) {
+            System.out.println("\n*****");
+            for (Map.Entry<String, String> key : job.entrySet()) {
+                System.out.println(key.getKey() + ": " + key.getValue());
+            }
+            System.out.println("*****");
+        }
     }
 }
+
+//.entryset() will get key/value pairs in HashMap
+//The Map Class -to loop over a hashmap by specifying the type of one key/value pair at a time
+//out of the entire set of entries. Import Map class from java.util
+//Map.Entry<String, String>
+//.getEntry() will get key/value pairs
+//iterate over an ArrayList of jobs
+//each job itself is a HashMap
+//create a nested loop to loop over each HashMap
+//if no results, print "No Results"
